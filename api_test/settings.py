@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "evaluations",
     "questions",
+    "questions_options",
 ]
 
 MIDDLEWARE = [
