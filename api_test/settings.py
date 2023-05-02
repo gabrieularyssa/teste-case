@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "questions",
     "questions_options",
     "answers",
+    "scores",
 ]
 
 MIDDLEWARE = [
