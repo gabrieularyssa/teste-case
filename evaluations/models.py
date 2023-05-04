@@ -15,6 +15,9 @@ class EvaluationQuestion(models.Model):
     )
     score = models.IntegerField()
 
+    def __repr__(self) -> str:
+        return f"<Evaluation_Question {self.id} - {self.score}>"
+
 
 class Evaluation(models.Model):
     title = models.CharField(max_length=50)

@@ -10,4 +10,5 @@ class QuestionOption(models.Model):
     question = models.ForeignKey(
         "questions.Question",
         on_delete=models.CASCADE,
+        related_name="question",
     )
