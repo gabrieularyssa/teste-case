@@ -2,6 +2,7 @@ from rest_framework import serializers
 from answers.models import Answer
 from questions.serializers import QuestionSerializer
 from questions_options.serializers import QuestionOptionSerializer
+from scores.serializers import ScoreSerializer
 
 
 class AnswerSerializer(serializers.Serializer):
@@ -9,3 +10,4 @@ class AnswerSerializer(serializers.Serializer):
     user_id = serializers.IntegerField(default=1001)
     question = serializers.QuestionSerializer()
     question_option = serializers.QuestionOptionSerializer()
+    score = serializers.ScoreSerializer()
