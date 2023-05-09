@@ -7,7 +7,7 @@ from scores.serializers import ScoreSerializer
 
 class AnswerSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
-    user_id = serializers.IntegerField(default=1001)
+    user_id = serializers.IntegerField(required=False, default=1001)
     question = serializers.QuestionSerializer()
     question_option = serializers.QuestionOptionSerializer()
-    score = serializers.ScoreSerializer()
+    score = serializers.ScoreSerializer(required=False, default=1)
