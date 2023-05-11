@@ -19,11 +19,11 @@ class AnswerSerializer(serializers.Serializer):
     question = QuestionSerializer(required=False)
     question_option = QuestionOptionSerializer(required=False)
     # score = ScoreSerializer(required=False, default=0)
-    # evaluation = EvaluationSerializer(required=False)
+    evaluation = EvaluationSerializer(required=False)
 
     question_id = serializers.IntegerField()
     question_option_id = serializers.IntegerField()
-    # evaluation_id = serializers.IntegerField()
+    evaluation_id = serializers.IntegerField()
     # score_id = serializers.IntegerField(write_only=True)
 
     class Meta:
@@ -32,23 +32,23 @@ class AnswerSerializer(serializers.Serializer):
             "id",
             "question_id",
             "question_option_id",
-            # "evaluation_id",
+            "evaluation_id",
             # "score_id",
         ]
         read_only_fields = ["id"]
 
     def create(self, validated_data):
         body = {**validated_data}
-        # evaluation_id = body.get("evaluation_id")
+        evaluation = body.get("evaluation_id")
         question = body.get("question_id")
         question_option = body.get("question_option_id")
 
         # score_id = body.get("score_id")
 
-        # try:
-        #     evaluation = get_object_or_404(Evaluation, pk=evaluation_id)
-        # except Http404:
-        #     raise NotFound("Evaluation not found")
+        try:
+            evaluation = get_object_or_404(Evaluation, pk=evaluation)
+        except Http404:
+            raise NotFound("Evaluation not found")
 
         try:
             question = get_object_or_404(Question, pk=question)
