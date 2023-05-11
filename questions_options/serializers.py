@@ -8,4 +8,4 @@ class QuestionOptionSerializer(serializers.Serializer):
     content = serializers.CharField(max_length=300)
     sequence = serializers.CharField(max_length=5)
     correct = serializers.BooleanField(default=False)
-    question = serializers.QuestionSerializer()
+    question = QuestionSerializer()
