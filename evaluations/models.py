@@ -1,10 +1,9 @@
 from django.db import models
 
-
 # Create your models here.
 
 
-class EvaluationQuestion(models.Model):
+class EvaluationQuestions(models.Model):
     evaluations = models.ForeignKey(
         "Evaluation",
         on_delete=models.CASCADE,
@@ -25,7 +24,7 @@ class Evaluation(models.Model):
     questions = models.ManyToManyField(
         "questions.Question",
         related_name="evaluations",
-        through="EvaluationQuestion",
+        through="EvaluationQuestions",
     )
 
     def __repr__(self) -> str:
