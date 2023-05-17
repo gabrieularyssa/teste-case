@@ -38,7 +38,7 @@ class AnswerView(APIView):
         # verifica se a prova existe
         existing_evaluation = Evaluation.objects.filter(id=evaluation_id)
         if not existing_evaluation:
-            return HttpResponse("Esta avaliação não existe!")
+            return HttpResponseBadRequest("Esta avaliação não existe!")
 
         # salva os dados da requisição no banco de dados
         serializer.save()
@@ -47,6 +47,7 @@ class AnswerView(APIView):
         question_id = [item["id"] for item in questions]
 
         answers = Answer.objects.filter(user_id=user_id, question_id__in=question_id)
+
         total_score = 0
         for answer in answers:
             question_option = get_object_or_404(
