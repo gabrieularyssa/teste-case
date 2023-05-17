@@ -47,25 +47,6 @@ class AnswerSerializer(serializers.Serializer):
         body = {**validated_data}
         evaluation = body.get("evaluation_id")
         questions = body.get("questions")
-        # print(questions)
-        # question_option = body.get("question_option_id")
-
-        # score_id = body.get("score_id")
-
-        # try:
-        #     evaluation = get_object_or_404(Evaluation, pk=evaluation)
-        # except Http404:
-        #     raise NotFound("Evaluation not found")
-
-        # try:
-        #     question = get_object_or_404(Question, pk=question)
-        # except Http404:
-        #     raise NotFound("Question not found")
-
-        # try:
-        #     question_option = get_object_or_404(Question, pk=question_option)
-        # except Http404:
-        #     raise NotFound("Question Option not found")
 
         question_list = []
         for question in questions:
@@ -75,5 +56,4 @@ class AnswerSerializer(serializers.Serializer):
                 evaluation_id=evaluation,
             )
             question_list.append(answer)
-            # print(question)
         return answer

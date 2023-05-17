@@ -5,7 +5,9 @@ from answers.models import Answer
 import json
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.http import Http404
 from django.http import HttpResponseBadRequest
+from django.http import HttpResponse
 
 from evaluations.models import Evaluation, EvaluationQuestions
 from questions_options.models import QuestionOption
@@ -24,10 +26,7 @@ class AnswerView(APIView):
 
         user_id = 1001
         evaluation_id = body.get("evaluation_id")
-        evaluation = get_object_or_404(
-            Evaluation,
-            id=evaluation_id,
-        )
+
         # verifica se a prova ja foi respondida pelo usuario
         existing_answer = Answer.objects.filter(
             user_id=user_id, evaluation_id=evaluation_id
@@ -36,6 +35,10 @@ class AnswerView(APIView):
             return HttpResponseBadRequest(
                 "A avaliação ja foi respondida por este usuário!"
             )
+        # verifica se a prova existe
+        existing_evaluation = Evaluation.objects.filter(id=evaluation_id)
+        if not existing_evaluation:
+            return HttpResponse("Esta avaliação não existe!")
 
         # salva os dados da requisição no banco de dados
         serializer.save()
